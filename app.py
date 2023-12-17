@@ -3,7 +3,7 @@ import tempfile # PDFアップロードの際に必要
 
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import PyMuPDFLoader
-from langchain.text_splitter import SpacyTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 from langchain.chains import ConversationalRetrievalChain
@@ -50,9 +50,10 @@ if uploaded_file:
     loader = PyMuPDFLoader(file_path=tmp_file_path) 
     documents = loader.load() 
 
-    text_splitter = SpacyTextSplitter(
-        chunk_size=select_chunk_size,
-        pipeline="ja_core_news_sm",
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size = select_chunk_size,
+        chunk_overlap  = 100,
+        length_function = len,
     )
 
     data = text_splitter.split_documents(documents)
@@ -110,7 +111,6 @@ if uploaded_file:
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 response = chain(
