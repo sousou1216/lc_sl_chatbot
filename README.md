@@ -1,1 +1,1 @@
-# lc_sl_chatbot
+# lLangChain×Streamlit×RAGによるチャットボットアプリ
