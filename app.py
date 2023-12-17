@@ -1,4 +1,5 @@
 import os
+import tempfile # PDFアップロードの際に必要
 
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import PyMuPDFLoader
@@ -9,7 +10,6 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 # from langchain.callbacks.base import BaseCallbackHandler
 import streamlit as st
-import tempfile # PDFアップロードの際に必要
 
 
 folder_name = "./.data"
