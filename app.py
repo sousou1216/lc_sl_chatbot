@@ -72,7 +72,7 @@ if uploaded_file:
     chat = ChatOpenAI(
         model=select_model,
         temperature=select_temperature,
-        streaming=True,
+        # streaming=True,
     )
 
     # retrieverに変換（検索、プロンプトの構築）
@@ -124,6 +124,5 @@ if uploaded_file:
 
     # メモリの内容をターミナルで確認
     print(memory)
-
 
 
